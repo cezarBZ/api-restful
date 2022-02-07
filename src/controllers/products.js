@@ -40,6 +40,7 @@ async function put(req, res) {
         product
     })
 
+    // funciona igual o trecho de cima, só não retorna o produto atualizado
     /* const product = await ProductsModel .findOne({ _id: id })
 
     await product.updateOne(req.body)
@@ -49,8 +50,21 @@ async function put(req, res) {
         product
     }) */
 }
+
+async function remove(req,res) {
+    const { id } = req.params
+
+    const remove = await ProductsModel.deleteOne({ _id: id })
+
+    const message = remove ? 'success' : 'error'
+
+    res.send({
+        message
+    })
+}
 module.exports = {
     get,
     post,
-    put
+    put,
+    remove
 }
